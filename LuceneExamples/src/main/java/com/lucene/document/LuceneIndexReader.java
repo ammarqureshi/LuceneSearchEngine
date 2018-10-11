@@ -1,6 +1,7 @@
 package com.lucene.document;
 
 import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,11 +29,17 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.analysis.CharArraySet;
 
-public class LuceneReadIndex 
+public class LuceneIndexReader 
 {
-	private static final String INDEX_DIR = "/Users/ammarqureshi/Documents/IR/INDEX_DIR";
+	private String index_dir;
+	
+	public LuceneIndexReader(String index_dir) {
+		this.index_dir = index_dir;
+	}
+	
+	//private static final String INDEX_DIR = "/Users/ammarqureshi/Documents/IR/INDEX_DIR";
 
-	public static void main(String[] args) throws Exception 
+	public void readDocs() throws IOException, ParseException
 	{
 		IndexSearcher searcher = createSearcher();
 	//	searcher.setSimilarity(new BM25Similarity());
@@ -141,8 +148,8 @@ public class LuceneReadIndex
 	}
 
 
-	private static IndexSearcher createSearcher() throws IOException {
-		Directory dir = FSDirectory.open(Paths.get(INDEX_DIR));
+	private IndexSearcher createSearcher() throws IOException {
+		Directory dir = FSDirectory.open(Paths.get(index_dir));
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher searcher = new IndexSearcher(reader);
 		return searcher;

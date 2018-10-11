@@ -1,4 +1,4 @@
-package com.lucene.document;
+ package com.lucene.document;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -25,12 +25,19 @@ import org.apache.lucene.search.similarities.NormalizationZ;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-public class LuceneWriteIndex 
+public class LuceneIndexWriter 
 {
-	private static final String INDEX_DIR = "/Users/ammarqureshi/Documents/IR/INDEX_DIR";
+	private static String index_dir;
+	public LuceneIndexWriter(String index_dir) {
+		this.index_dir = index_dir;
+		
+	}
+	//private static final String INDEX_DIR = "/Users/ammarqureshi/Documents/IR/INDEX_DIR";
 
-	public static void main(String[] args) throws Exception 
-	{
+	public void indexDocs() throws IOException {
+		
+	//public static void main(String[] args) throws Exception 
+	
 		IndexWriter writer = createWriter();
 		ArrayList<CranfieldDocument> parsedDocs = CranfieldParser.parseCranfieldDocs("cran.all.1400");
 		List<Document> documents = new ArrayList<>();
@@ -60,11 +67,9 @@ public class LuceneWriteIndex
 		return document;
 	}
 
-
-
 	private static IndexWriter createWriter() throws IOException 
 	{
-		FSDirectory dir = FSDirectory.open(Paths.get(INDEX_DIR));
+		FSDirectory dir = FSDirectory.open(Paths.get(index_dir));
 		//IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(CharArraySet.EMPTY_SET));
 	
 		IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(CharArraySet.EMPTY_SET));
@@ -76,7 +81,7 @@ public class LuceneWriteIndex
 //			      "that", "the", "their", "then", "there", "these",
 //			      "they", "this", "to", "was", "will", "with"),false)));
 
-		config.setSimilarity(new BM25Similarity());
+		//config.setSimilarity(new BM25Similarity());
 	//	IndexWriterConfig config = new IndexWriterConfig(new SnowballAnalyzer());
 
 		IndexWriter writer = new IndexWriter(dir, config);

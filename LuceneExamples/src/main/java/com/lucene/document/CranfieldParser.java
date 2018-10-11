@@ -13,10 +13,10 @@ public class CranfieldParser {
 
 
 	public static ArrayList<CranfieldDocument> parseCranfieldDocs(String fileName) throws FileNotFoundException{
-		//File file = new File("/Users/ammarqureshi/Documents/IR/cran/cran.all.1400");
+		File file = new File("/Users/ammarqureshi/Documents/IR/cran/cran.all.1400");
 		//URL url = getClass().getResource(fileLocation);
-		URL path =  CranfieldParser.class.getResource(fileName);
-		File file = new File(path.getFile());
+		//URL path =  CranfieldParser.class.getResource(fileName);
+		//File file = new File(path.getFile());
 	//	File file= new File(fileLocation);
 		//File file = new File("/Users/ammarqureshi/Documents/cranfieldTest.txt");
 		Scanner sc = new Scanner(file);
