@@ -45,7 +45,7 @@ public class LuceneIndexReader
 	//	searcher.setSimilarity(new BM25Similarity());
 	//	searcher.setSimilarity(new SimilarityBase());
 
-		ArrayList<String> queryList = CranQueries.extractCranQueries("/Users/ammarqureshi/Documents/IR/modified_cran.qry");
+		ArrayList<String> queryList = CranQueries.extractCranQueries("cran.qry");
 		ArrayList<ArrayList<String[]>> queryResult = new ArrayList<>();
 		int queryIx=1;
 
@@ -129,8 +129,14 @@ public class LuceneIndexReader
 		}
 
 		//write system response to file
+	//	File file = new File("/Users/ammarqur/systemFile.txt");
+		String workingDir = System.getProperty("user.dir");
+	//	System.out.println("user dir: " + user_dir);
+		String systemFilePath = workingDir.concat("/systemFile.txt");
+		File file = new File(systemFilePath);
 
-		File file = new File("/Users/ammarqureshi/Documents/IR/systemFile.txt");
+		
+		
 		BufferedWriter output = null;
 		output = new BufferedWriter(new FileWriter(file));
 		
@@ -144,7 +150,7 @@ public class LuceneIndexReader
 			}
 		}
 		output.close();
-		System.out.println("written to system file");
+		System.out.println("written to system file @ " + systemFilePath);
 	}
 
 

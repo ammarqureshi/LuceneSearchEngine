@@ -20,10 +20,10 @@ public class CranQueries {
 		}
 	}
 
-	public static ArrayList<String> extractCranQueries(String filepath) throws FileNotFoundException{
+	public static ArrayList<String> extractCranQueries(String fileName) throws FileNotFoundException{
 
-		File file= new File(filepath);
-		Scanner sc = new Scanner(file);
+		//File file= new File(filepath);
+		Scanner sc = new Scanner(CranQueries.class.getResourceAsStream(fileName));
 		String line;
 		String accQuery = new String();
 		String currTag = new String();

@@ -3,6 +3,7 @@ package com.lucene.document;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,14 +13,10 @@ public class CranfieldParser {
 	static ArrayList<CranfieldDocument> docs = new ArrayList<>();
 
 
-	public static ArrayList<CranfieldDocument> parseCranfieldDocs(String fileName) throws FileNotFoundException{
-		File file = new File("/Users/ammarqureshi/Documents/IR/cran/cran.all.1400");
-		//URL url = getClass().getResource(fileLocation);
-		//URL path =  CranfieldParser.class.getResource(fileName);
-		//File file = new File(path.getFile());
-	//	File file= new File(fileLocation);
-		//File file = new File("/Users/ammarqureshi/Documents/cranfieldTest.txt");
-		Scanner sc = new Scanner(file);
+	public static ArrayList<CranfieldDocument> parseCranfieldDocs() throws FileNotFoundException{
+	//	File file = new File("/Users/ammarqureshi/Documents/cranfieldTest.txt");
+	//	Scanner sc = new Scanner(file);
+		Scanner sc =  new Scanner(CranfieldParser.class.getResourceAsStream("cran.all.1400"));
 		String line;
 		String acc = new String();
 		String currTag = null;

@@ -8,11 +8,13 @@ public class Main {
 
 	public static void main(String[] args) throws IOException, ParseException {
 
+		String workingDir = System.getProperty("user.dir");
+		String indexStoreDir = workingDir.concat("/INDEX_DIR");
 		//write
-		LuceneIndexWriter indexWriter = new LuceneIndexWriter("/Users/ammarqureshi/Documents/IR/INDEX_DIR");
+		LuceneIndexWriter indexWriter = new LuceneIndexWriter(indexStoreDir);
 		indexWriter.indexDocs();
 		//read and output
-		LuceneIndexReader indexReader = new LuceneIndexReader("/Users/ammarqureshi/Documents/IR/INDEX_DIR");
+		LuceneIndexReader indexReader = new LuceneIndexReader(indexStoreDir);
 		indexReader.readDocs();
 		
 	}

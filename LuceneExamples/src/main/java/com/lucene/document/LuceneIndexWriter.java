@@ -1,4 +1,4 @@
- package com.lucene.document;
+package com.lucene.document;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -27,37 +27,35 @@ import org.apache.lucene.util.Version;
 
 public class LuceneIndexWriter 
 {
-	private static String index_dir;
+	private String index_dir;
+
 	public LuceneIndexWriter(String index_dir) {
 		this.index_dir = index_dir;
-		
+
 	}
-	//private static final String INDEX_DIR = "/Users/ammarqureshi/Documents/IR/INDEX_DIR";
 
 	public void indexDocs() throws IOException {
-		
-	//public static void main(String[] args) throws Exception 
-	
+
 		IndexWriter writer = createWriter();
-		ArrayList<CranfieldDocument> parsedDocs = CranfieldParser.parseCranfieldDocs("cran.all.1400");
+		ArrayList<CranfieldDocument> parsedDocs = CranfieldParser.parseCranfieldDocs();
 		List<Document> documents = new ArrayList<>();
 
 		Document tempDoc = new Document();
 		for(CranfieldDocument parsedDoc:parsedDocs) {
-		System.out.println("\n\n" + parsedDoc.getId() + " was added");
-		tempDoc = createDocument(parsedDoc.getId(), parsedDoc.getTitle(), parsedDoc.getAuthors(), parsedDoc.getBibliog(), parsedDoc.getWords());
-		documents.add(tempDoc);
-	}
-	
+			System.out.println("\n\n" + parsedDoc.getId() + " was added");
+			tempDoc = createDocument(parsedDoc.getId(), parsedDoc.getTitle(), parsedDoc.getAuthors(), parsedDoc.getBibliog(), parsedDoc.getWords());
+			documents.add(tempDoc);
+		}
+
 		//clean everything 
 		writer.deleteAll();
 		//add the documents
 		writer.addDocuments(documents);
 		writer.commit();
-	    writer.close();
+		writer.close();
 	}
 
-	private static Document createDocument(String id, String title, String authors, String bibliog, String words) {
+	public Document createDocument(String id, String title, String authors, String bibliog, String words) {
 		Document document = new Document();
 		document.add(new StringField("id", id, Field.Store.YES));
 		document.add(new TextField("title", title, Field.Store.YES) );
@@ -67,22 +65,22 @@ public class LuceneIndexWriter
 		return document;
 	}
 
-	private static IndexWriter createWriter() throws IOException 
+	private IndexWriter createWriter() throws IOException 
 	{
 		FSDirectory dir = FSDirectory.open(Paths.get(index_dir));
 		//IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(CharArraySet.EMPTY_SET));
-	
+
 		IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(CharArraySet.EMPTY_SET));
-		
-//		IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(new CharArraySet(Arrays.asList(
-//				"?" , "a", "an", "and", "are", "as", "at", "be", "but", "by",
-//			      "for", "if", "in", "into", "is", "it",
-//			      "no", "not", "of", "on", "or", "such",
-//			      "that", "the", "their", "then", "there", "these",
-//			      "they", "this", "to", "was", "will", "with"),false)));
+
+		//		IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(new CharArraySet(Arrays.asList(
+		//				"?" , "a", "an", "and", "are", "as", "at", "be", "but", "by",
+		//			      "for", "if", "in", "into", "is", "it",
+		//			      "no", "not", "of", "on", "or", "such",
+		//			      "that", "the", "their", "then", "there", "these",
+		//			      "they", "this", "to", "was", "will", "with"),false)));
 
 		//config.setSimilarity(new BM25Similarity());
-	//	IndexWriterConfig config = new IndexWriterConfig(new SnowballAnalyzer());
+		//	IndexWriterConfig config = new IndexWriterConfig(new SnowballAnalyzer());
 
 		IndexWriter writer = new IndexWriter(dir, config);
 		return writer;
