@@ -14,9 +14,35 @@ public class CranfieldParser {
 
 
 	public static ArrayList<CranfieldDocument> parseCranfieldDocs() throws FileNotFoundException{
+		//File file = new File("/Users/ammarqureshi/Documents/IR/cran/cran.all.1400");
+	
+
+		
+		
+	   // URL fileUrl = CranfieldParser.class.getResource("/LuceneExamples/src/main/java/com/lucene/document/cran.all.1400");
+	  //  File  file = new File(fileUrl.getFile());
+		//URL url = getClass().getResource(fileLocation);
+//		URL path =  CranfieldParser.class.getResource(fileName);
+	//	File file = new File(path.getFile());
+	//	File file= new File(fileLocation);
 	//	File file = new File("/Users/ammarqureshi/Documents/cranfieldTest.txt");
-	//	Scanner sc = new Scanner(file);
-		Scanner sc =  new Scanner(CranfieldParser.class.getResourceAsStream("cran.all.1400"));
+		
+//		ClassLoader classLoader = CranfieldParser.class.getClassLoader();
+//		File file = new File(classLoader.getResource("cran.all.1400").getFile());
+//		Scanner sc = new Scanner(file);
+
+		String workingDir = System.getProperty("user.dir");
+		String cranDir = workingDir.concat("/cran_all_1400.txt");
+		File file = new File(cranDir);
+		Scanner sc = new Scanner(file);
+		
+//		try {
+	//	Scanner sc = new Scanner(CranfieldParser.class.getClassLoader().getResourceAsStream("cran.all.1400"));
+//		
+//		}
+//		catch(Exception e) {
+//			System.out.println(e.getMessage());
+//		}
 		String line;
 		String acc = new String();
 		String currTag = null;

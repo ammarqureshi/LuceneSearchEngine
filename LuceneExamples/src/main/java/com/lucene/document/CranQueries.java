@@ -23,7 +23,17 @@ public class CranQueries {
 	public static ArrayList<String> extractCranQueries(String fileName) throws FileNotFoundException{
 
 		//File file= new File(filepath);
-		Scanner sc = new Scanner(CranQueries.class.getResourceAsStream(fileName));
+//		ClassLoader classLoader = CranfieldParser.class.getClassLoader();
+//		File file = new File(classLoader.getResource(fileName).getFile());
+//		Scanner sc = new Scanner(file);
+//		
+		
+		String workingDir = System.getProperty("user.dir");
+		String cranQryDir = workingDir.concat("/cran.qry");
+		File file = new File(cranQryDir);
+		Scanner sc = new Scanner(file);
+		
+	//	Scanner sc = new Scanner(CranQueries.class.getResourceAsStream(fileName));
 		String line;
 		String accQuery = new String();
 		String currTag = new String();
