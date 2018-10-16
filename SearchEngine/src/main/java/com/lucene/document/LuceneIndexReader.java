@@ -137,20 +137,17 @@ public class LuceneIndexReader
 		String systemFilePath = workingDir.concat("/systemFile.txt");
 
 		if(similarity.getClass() == BM25Similarity.class) {
-			System.out.println("this is bm25 similarity");
-			new File(workingDir.concat("bm25similarity")).mkdirs();
-			systemFilePath = workingDir.concat("bm25similarity/systemFile.txt");
+			new File(workingDir.concat("_bm25similarity")).mkdirs();
+			systemFilePath = workingDir.concat("_bm25similarity/systemFile.txt");
 		}
 		
 		else if(similarity.getClass() == BooleanSimilarity.class) {
-			System.out.println("this is boolean similarity");
-			new File(workingDir.concat("booleansimilarity")).mkdirs();
-			systemFilePath = workingDir.concat("booleansimilarity/systemFile.txt");
+			new File(workingDir.concat("_booleansimilarity")).mkdirs();
+			systemFilePath = workingDir.concat("_booleansimilarity/systemFile.txt");
 		}	
 		else if(similarity.getClass() == ClassicSimilarity.class) {
-			System.out.println("this is TFIDF similarity");
-			new File(workingDir.concat("tfidfsimilarity")).mkdirs();
-			systemFilePath = workingDir.concat("tfidfsimilarity/systemFile.txt");
+			new File(workingDir.concat("_tfidfsimilarity")).mkdirs();
+			systemFilePath = workingDir.concat("_tfidfsimilarity/systemFile.txt");
 		}
 		
 		

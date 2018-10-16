@@ -42,15 +42,17 @@ public class LuceneIndexWriter
 
 		Document tempDoc = new Document();
 		for(CranfieldDocument parsedDoc:parsedDocs) {
-			System.out.println("\n\n" + parsedDoc.getId() + " was added");
+		//	System.out.println("\n\n" + parsedDoc.getId() + " was added");
 			tempDoc = createDocument(parsedDoc.getId(), parsedDoc.getTitle(), parsedDoc.getAuthors(), parsedDoc.getBibliog(), parsedDoc.getWords());
 			documents.add(tempDoc);
 		}
+		
 
 		//clean everything 
 		writer.deleteAll();
 		//add the documents
 		writer.addDocuments(documents);
+		System.out.println(documents.size() + " documents indexed");
 		writer.commit();
 		writer.close();
 	}
