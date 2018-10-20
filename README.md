@@ -18,9 +18,13 @@ After following the mentioned steps, you should get a directory which contians t
 
 ### Evaluating the search engine
 
-Unzip trec_eval
+#### Unzip trec_eval
 ```
 unzip trec_eval.zip
+```
+#### Installation
+```
+make
 ```
 
 QRels is the referential file ie the groud truth. TREC_EVAL takes in the following format:
