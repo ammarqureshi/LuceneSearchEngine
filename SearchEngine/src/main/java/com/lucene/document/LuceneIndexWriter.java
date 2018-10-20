@@ -31,7 +31,6 @@ public class LuceneIndexWriter
 
 	public LuceneIndexWriter(String index_dir) {
 		this.index_dir = index_dir;
-
 	}
 
 	public void indexDocs() throws IOException {
@@ -42,11 +41,9 @@ public class LuceneIndexWriter
 
 		Document tempDoc = new Document();
 		for(CranfieldDocument parsedDoc:parsedDocs) {
-		//	System.out.println("\n\n" + parsedDoc.getId() + " was added");
 			tempDoc = createDocument(parsedDoc.getId(), parsedDoc.getTitle(), parsedDoc.getAuthors(), parsedDoc.getBibliog(), parsedDoc.getWords());
 			documents.add(tempDoc);
 		}
-		
 
 		//clean everything 
 		writer.deleteAll();
@@ -70,20 +67,7 @@ public class LuceneIndexWriter
 	private IndexWriter createWriter() throws IOException 
 	{
 		FSDirectory dir = FSDirectory.open(Paths.get(index_dir));
-		//IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(CharArraySet.EMPTY_SET));
-
 		IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(CharArraySet.EMPTY_SET));
-
-		//		IndexWriterConfig config = new IndexWriterConfig(new EnglishAnalyzer(new CharArraySet(Arrays.asList(
-		//				"?" , "a", "an", "and", "are", "as", "at", "be", "but", "by",
-		//			      "for", "if", "in", "into", "is", "it",
-		//			      "no", "not", "of", "on", "or", "such",
-		//			      "that", "the", "their", "then", "there", "these",
-		//			      "they", "this", "to", "was", "will", "with"),false)));
-
-		//config.setSimilarity(new BM25Similarity());
-		//	IndexWriterConfig config = new IndexWriterConfig(new SnowballAnalyzer());
-
 		IndexWriter writer = new IndexWriter(dir, config);
 		return writer;
 	}
